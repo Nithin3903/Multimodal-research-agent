@@ -1,0 +1,4 @@
+/* Global base — App.css handles all real styling */
+*, *::before, *::after {
+  box-sizing: border-box;
+}

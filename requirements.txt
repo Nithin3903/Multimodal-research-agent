@@ -1,0 +1,58 @@
+# ============================================================
+# Multimodal Research Agent — Python Dependencies
+# ============================================================
+#
+# Install:  pip install -r requirements.txt
+#
+# Torch with CUDA 12.8 is listed separately because it requires
+# an extra index URL. Install it with:
+#
+#   pip install torch torchvision torchaudio \
+#       --index-url https://download.pytorch.org/whl/cu128
+#
+# If you have no GPU (CPU-only), install standard torch:
+#
+#   pip install torch torchvision torchaudio
+#
+# ============================================================
+
+# Web framework
+fastapi==0.141.1
+uvicorn==0.52.1
+python-multipart>=0.0.9
+
+# Data validation
+pydantic==2.13.4
+pydantic_core==2.46.4
+
+# Async
+anyio==4.14.2
+starlette==1.6.0
+httpx==0.28.1
+
+# LLM / Ollama
+ollama==0.6.2
+
+# PDF processing
+pymupdf==1.28.2
+
+# Image processing
+Pillow==12.2.0
+
+# Vector search
+faiss-cpu==1.15.0
+numpy==2.5.2
+
+# Embeddings
+sentence-transformers==5.7.0
+
+# BM25
+rank-bm25==0.2.2
+
+# Environment variables
+python-dotenv==1.2.2
+
+# ============================================================
+# GPU (CUDA 12.8) — install separately:
+# pip install torch==2.11.0+cu128 torchvision==0.26.0+cu128 torchaudio==2.11.0+cu128 --index-url https://download.pytorch.org/whl/cu128
+# ============================================================

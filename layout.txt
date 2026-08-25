@@ -1,0 +1,114 @@
+PAGE SIZE
+Width : 612.0
+Height: 792.0
+
+BLOCKS
+====================================================================================================
+
+BLOCK 0
+x0=86.3, y0=53.1, x1=525.7, y1=77.0
+width=439.4, height=23.9
+TEXT:
+Hybrid AI and IoT-Based Smart Aquaponics 
+
+BLOCK 1
+x0=76.5, y0=81.0, x1=535.5, y1=132.8
+width=459.0, height=51.8
+TEXT:
+System for Real-Time Monitoring, Fish Health Prediction, 
+
+BLOCK 2
+x0=190.7, y0=136.8, x1=421.3, y1=160.7
+width=230.6, height=23.9
+TEXT:
+and Automated Control 
+
+BLOCK 3
+x0=165.8, y0=176.0, x1=445.7, y1=188.9
+width=279.9, height=12.9
+TEXT:
+Nithin R∗, Dr. V. Padmapriya∗, and Nandana Kishore C Nair† 
+
+BLOCK 4
+x0=122.0, y0=188.8, x1=490.0, y1=201.2
+width=368.0, height=12.4
+TEXT:
+∗Department of Computer Applications, B.M.S. College of Engineering, Bengaluru, India 
+
+BLOCK 5
+x0=97.2, y0=203.2, x1=514.8, y1=225.8
+width=417.6, height=22.7
+TEXT:
+Email: {nithinr.mca24, padmapriyav.mca}@bmsce.ac.in †Department of Computer Science and Engineering, B.M.S. College of Engineering, Bengaluru, India 
+
+BLOCK 6
+x0=221.2, y0=228.2, x1=390.8, y1=238.2
+width=169.5, height=10.0
+TEXT:
+Email: nandanakishore.cs23@bmsce.ac.in 
+
+BLOCK 7
+x0=49.0, y0=267.2, x1=300.0, y1=425.8
+width=251.1, height=158.6
+TEXT:
+Abstract—Aquaponics is an emerging sustainable food pro- duction technology that integrates recirculating aquaculture with hydroponic plant cultivation in a closed-loop biological system. Despite the growing adoption of Internet of Things (IoT) technologies and Artificial Intelligence (AI) in precis
+
+BLOCK 8
+x0=49.0, y0=416.7, x1=300.0, y1=585.0
+width=251.1, height=168.4
+TEXT:
+3 ), and water level — and publish data via MQTT to a cloud-based broker. Six machine learning classifiers — Random Forest (RF), Decision Tree (DT), XGBoost, Multi- layer Perceptron (MLP), Radial Basis Function Support Vector Machine (RBF SVM), and Linear Support Vector Classifier (LinearSVC) — are 
+
+BLOCK 9
+x0=49.0, y0=586.5, x1=300.0, y1=615.4
+width=251.1, height=28.9
+TEXT:
+Index Terms—Aquaponics, Internet of Things (IoT), Machine Learning, Fish Health Prediction, XGBoost, Random Forest, ESP32, MQTT, Smart Agriculture, Automated Control 
+
+BLOCK 10
+x0=135.6, y0=631.2, x1=213.4, y1=641.2
+width=77.8, height=10.0
+TEXT:
+I. INTRODUCTION 
+
+BLOCK 11
+x0=49.0, y0=649.1, x1=300.0, y1=718.9
+width=251.1, height=69.7
+TEXT:
+Global food security is under increasing pressure from pop- ulation growth, climate change, land degradation, and freshwa- ter scarcity [1]. Aquaponics — the synergistic combination of recirculating aquaculture (fish farming) and hydroponics (soil- less plant cultivation) — has attracted considerabl
+
+BLOCK 12
+x0=312.0, y0=266.5, x1=563.0, y1=336.3
+width=251.1, height=69.7
+TEXT:
+a typical aquaponics cycle, fish metabolic waste is converted by nitrifying bacteria into plant-available nutrients, while plant roots absorb nitrates and return filtered water to the fish tank, reducing water consumption by up to 90–95% compared with conventional agriculture and eliminating synthet
+
+BLOCK 13
+x0=312.0, y0=340.2, x1=563.0, y1=457.8
+width=251.1, height=117.6
+TEXT:
+Despite these advantages, aquaponics systems are biologi- cally complex and operationally sensitive. Water quality pa- rameters such as pH, dissolved oxygen (DO), temperature, ammonia, and nitrate must be maintained within narrow species-specific ranges. Deviations — even transient — can lead to acu
+
+BLOCK 14
+x0=312.0, y0=461.7, x1=563.0, y1=591.2
+width=251.1, height=129.5
+TEXT:
+The rapid proliferation of low-cost IoT hardware (ESP32, Arduino, Raspberry Pi) and cloud connectivity has enabled continuous, automated sensor data acquisition. Concurrently, advances in machine learning (ML) have demonstrated strong predictive capabilities for water quality and fish behaviour mode
+
+BLOCK 15
+x0=312.0, y0=595.2, x1=563.0, y1=617.1
+width=251.1, height=21.9
+TEXT:
+This paper addresses that gap by making the following contributions: 
+
+BLOCK 16
+x0=321.9, y0=625.2, x1=563.0, y1=683.0
+width=241.1, height=57.8
+TEXT:
+• Design and implementation of HAISAS, a multi-layer Hybrid AI-IoT Smart Aquaponics System integrating ESP32 sensor nodes, an MQTT communication back- bone, a Raspberry Pi edge gateway, cloud ML inference, and actuator control. 
+
+BLOCK 17
+x0=321.9, y0=685.0, x1=563.0, y1=718.9
+width=241.1, height=33.9
+TEXT:
+• A comparative evaluation of six ML classifiers (RF, DT, XGBoost, MLP, RBF SVM, LinearSVC) for three-class fish health prediction using engineered environmental and 

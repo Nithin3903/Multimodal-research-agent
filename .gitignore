@@ -1,0 +1,30 @@
+# Environments
+.env
+.venv/
+.ocr_venv/
+.ocr_vencd/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Dependencies
+__pycache__/
+*.py[cod]
+*$py.class
+frontend/node_modules/
+frontend/dist/
+
+# Data and Models
+data/
+*.pdf
+*.db
+*.sqlite3
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+*.swp
+Thumbs.db
