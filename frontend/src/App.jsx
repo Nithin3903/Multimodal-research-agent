@@ -5,6 +5,7 @@ const API_BASE = "http://127.0.0.1:8000";
 const API_ASK = `${API_BASE}/ask`;
 const API_UPLOAD = `${API_BASE}/upload`;
 const API_STATUS = `${API_BASE}/status`;
+const API_REMOVE = (filename) => `${API_BASE}/document/${encodeURIComponent(filename)}`;
 
 // ─────────────────────────────────────────────────────────────
 // MINI MARKDOWN RENDERER
@@ -333,6 +334,33 @@ export default function App() {
     setTimeout(() => textareaRef.current?.focus(), 50);
   }
 
+  // ── Remove a single PDF ───────────────────────────────────
+
+  async function removeDocument(filename) {
+    if (uploading) return;
+    try {
+      const res = await fetch(API_REMOVE(filename), { method: "DELETE" });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({ detail: "Remove failed." }));
+        throw new Error(err.detail || `HTTP ${res.status}`);
+      }
+      const data = await res.json();
+      setDocuments(data.documents || []);
+      setMessages((prev) => [
+        ...prev,
+        {
+          type: "error",
+          text: `"${filename}" removed. Note: if you want to query the remaining documents, please re-upload them so the index is rebuilt.`,
+        },
+      ]);
+    } catch (error) {
+      setMessages((prev) => [
+        ...prev,
+        { type: "error", text: `Could not remove "${filename}": ${error.message}` },
+      ]);
+    }
+  }
+
   // ── Render ────────────────────────────────────────────────
 
   const progressPct = totalSteps > 0 ? Math.round((processingStep / totalSteps) * 100) : 0;
@@ -431,9 +459,22 @@ export default function App() {
                     <strong title={doc}>{doc.length > 28 ? doc.slice(0, 25) + "…" : doc}</strong>
                     <span>PDF · Ready</span>
                   </div>
+                  <button
+                    className="doc-remove-btn"
+                    title={`Remove ${doc}`}
+                    disabled={uploading}
+                    onClick={() => removeDocument(doc)}
+                    aria-label={`Remove ${doc}`}
+                  >
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="18" y1="6" x2="6" y2="18"/>
+                      <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                  </button>
                 </div>
               ))
             )}
+
           </div>
         </div>
 

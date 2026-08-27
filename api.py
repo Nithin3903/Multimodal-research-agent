@@ -4,6 +4,16 @@ import os
 import shutil
 import sys
 
+# ── Force UTF-8 on the uvicorn console so that Hindi/Kannada
+# characters in log output never trigger a charmap codec error.
+try:
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    if hasattr(sys.stderr, "reconfigure"):
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+except Exception:
+    pass
+
 from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -162,6 +172,46 @@ def document_info():
 
 
 # ============================================================
+# REMOVE A SINGLE PDF
+# ============================================================
+
+@app.delete("/document/{filename}")
+def remove_document(filename: str):
+
+    if processing_status["processing"]:
+        raise HTTPException(
+            status_code=409,
+            detail="Cannot remove a document while processing is in progress."
+        )
+
+    # Prevent path traversal attacks.
+    safe_name = os.path.basename(filename)
+
+    pdf_path = os.path.join(DOCUMENTS_DIR, safe_name)
+
+    if not os.path.isfile(pdf_path):
+        raise HTTPException(
+            status_code=404,
+            detail=f"Document not found: {safe_name}"
+        )
+
+    os.remove(pdf_path)
+
+    # Return the updated list of remaining PDFs.
+    remaining = [
+        f for f in os.listdir(DOCUMENTS_DIR)
+        if f.lower().endswith(".pdf")
+    ]
+
+    return {
+        "success": True,
+        "removed": safe_name,
+        "documents": remaining,
+        "message": f"Removed {safe_name}. Re-upload or reprocess remaining documents."
+    }
+
+
+# ============================================================
 # RUN PIPELINE SCRIPT
 # ============================================================
 
@@ -193,21 +243,23 @@ def run_pipeline_script(script_name):
     )
 
     if process.stdout:
-        try:
-            print(process.stdout)
-        except UnicodeEncodeError:
-            print(process.stdout.encode("cp1252", errors="replace").decode("cp1252"))
+        # Safe-print: replace any character the console can't encode.
+        safe_stdout = process.stdout.encode("utf-8", errors="replace").decode("utf-8", errors="replace")
+        print(safe_stdout)
 
     if process.returncode != 0:
 
-        try:
-            print(process.stderr)
-        except UnicodeEncodeError:
-            print(process.stderr.encode("cp1252", errors="replace").decode("cp1252"))
+        safe_stderr = process.stderr.encode("utf-8", errors="replace").decode("utf-8", errors="replace")
+        print(safe_stderr)
+
+        # Strip non-ASCII characters from the error message that will be
+        # embedded in the HTTP response detail, so FastAPI / Starlette can
+        # always serialise it safely even on a Windows cp1252 host.
+        ascii_safe_error = safe_stderr.encode("ascii", errors="replace").decode("ascii")
 
         raise RuntimeError(
             f"{script_name} failed.\n\n"
-            f"{process.stderr}"
+            f"{ascii_safe_error}"
         )
 
     print(
